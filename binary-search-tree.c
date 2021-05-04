@@ -131,17 +131,38 @@ int initializeBST(Node** h) {
 
 
 void inorderTraversal(Node* ptr)
-{
+{	//왼쪽에서 root 오른쪽의 순서로 재귀함수를 이용하여 전부 출력, 정렬의 형태로 값이 출력됨.
+	if (ptr != NULL) // 만약 ptr이 NULL이 아니라면
+	{
+		inorderTraversal(ptr->left); //ptr의 left를 재귀함수에 보내줌
+		printf("[%d]", ptr->key); //ptr의 key값을 출력함
+		inorderTraversal(ptr->right); //ptr의 right를 재귀함수에 보내줌
+		return 0;
+	}
 
 }
 
 void preorderTraversal(Node* ptr)
-{
+{	//root를 가장 먼저 방문하고 왼쪽, 오른쪽의 순으로 값이 출력된다. 재귀함수를 이용해서 나머지 순회방식과 순서를 다르게하여 구현할 수 있다.
+	if (ptr != NULL)
+	{
+		printf("[%d]", ptr->key); //ptr의 key값을 출력함
+		preorderTraversal(ptr->left); //ptr의 left값을 재귀함수에 보냄
+		preorderTraversal(ptr->right); //ptr의 rigth값을 재귀함수에 보냄
+		return 0;
+	}
 
 }
 
 void postorderTraversal(Node* ptr)
-{
+{	//왼쪽, 오른쪽, root의 순으로 값이 출력됨
+	if (ptr != NULL)
+	{
+		postorderTraversal(ptr->left); //ptr의 left값을 재귀함수에 보내줌
+		postorderTraversal(ptr->right); //ptr의 right값을 재귀함수에 보내줌
+		printf("[%d]", ptr->key); // ptr의 key값을 출력함
+		return 0;
+	}
 
 }
 
