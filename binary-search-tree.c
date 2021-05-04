@@ -169,7 +169,49 @@ void postorderTraversal(Node* ptr)
 
 int insert(Node* head, int key)
 {
+	Node* n1 = (Node*)malloc(sizeof(Node));
+	n1->key = key;
+	Node* root = head->left;
+
+	if (head->left == NULL) //헤더노드의 left가 NULL이면 (트리에 노드가 없음, 첫노드를 삽입)
+	{
+		head->left = n1; //헤더노드의 left 가 n1이 된다.
+		n1->left = NULL; //n1의 left와 right를 NULL값으로 설정
+		n1->right = NULL;
+		return 0;
+	}
+	while (root != NULL) // root의 값이 NULL일 때까지
+	{
+		if (key < root->key) //root의 key값보다 key값이 작을경우
+		{
+			if (root->left == NULL) // root의 left가 NULL일 경우
+			{
+				root->left = n1; //n1은 root의 left
+				n1->left = n1->right = NULL; //n1의 left와right를 NULL로 초기화
+				break; //반복문을 나감
+			}
+			else {
+				root = root->left; //root의 left값이 NULL이 아니라면 root의 값을 root의 왼쪽노드로 이동
+
+			}
+
+		}
+		else if (key > root->key) // root의 key값보다 key값이 클경우
+		{
+			if (root->right == NULL) { // root의 right가 NULL일 경우
+				root->right = n1; //root의 right는 n1이 됨
+				n1->left = n1->right = NULL; //n1의 left와 right를 NULL로 초기화
+				break;
+			}
+			else {
+				root = root->right; //root의 right값이 NULL이 아니라면 root의 값을 root의 오른쪽노드로 이동
+
+			}
+
+		}
+	}
 	return 0;
+
 }
 
 int deleteLeafNode(Node* head, int key)
